@@ -216,8 +216,11 @@
     kind = first ? 'normal' : r < GOLD ? 'gold' : r < GOLD + level.helmet ? 'helmet' : 'normal';
     first = false;
     holes[cur].className = 'hole m up ' + kind;
-    escapeTimer = setTimeout(escape, kind === 'gold' ? limit / 2 : limit);
+    escapeTimer = setTimeout(escape, kind === 'gold' ? goldTime(limit) : limit);
   }
+
+  // 金は普通の6割の時間。ただし0.65秒より速くせず、普通より遅くもしない
+  function goldTime(t) { return Math.min(t, Math.max(650, t * 0.6)); }
 
   // 引っ込めてから、少し間をあけて次を出す
   function hide(i, wait) {
@@ -307,6 +310,7 @@
   $('back').onclick = () => { showBest(); $('over').hidden = true; $('title').hidden = false; };
 
   score = 0; lives = 3; hud(); showBest();
+  console.assert(goldTime(1800) === 1080 && goldTime(1000) === 650 && goldTime(500) === 500, 'goldTime');
 </script>
 </body>
 </html>
