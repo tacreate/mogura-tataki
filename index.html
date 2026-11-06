@@ -99,9 +99,10 @@
   @keyframes pulse { to { transform: scale(1.08); } }
   .row { display: flex; gap: 3cqw; width: 100%; }
   .row .btn { flex: 1; }
-  #count { position: absolute; inset: 0; z-index: 25; display: flex; align-items: center; justify-content: center; pointer-events: none;
+  #count { position: absolute; inset: 0; z-index: 25; display: flex; align-items: center; justify-content: center; pointer-events: none; white-space: nowrap;
            font-size: 22cqw; font-weight: bold; color: #fff;
            text-shadow: 0 1.2cqw 0 #3a2412, 1cqw 0 #3a2412, -1cqw 0 #3a2412, 0 -1cqw #3a2412; }
+  #count.word { font-size: 15cqw; }
   #count.go { animation: zoom .5s ease-out; }
   @keyframes zoom { from { transform: scale(1.8); opacity: 0; } }
 
@@ -277,7 +278,7 @@
     hud();
     $('title').hidden = true; $('over').hidden = true;
     const c = $('count'), steps = ['3', '2', '1', 'スタート！'];
-    steps.forEach((s, n) => setTimeout(() => { c.textContent = s; c.className = ''; void c.offsetWidth; c.className = 'go'; }, n * 600));
+    steps.forEach((s, n) => setTimeout(() => { c.textContent = s; c.className = ''; void c.offsetWidth; c.className = s.length > 1 ? 'go word' : 'go'; }, n * 600));
     setTimeout(() => { c.textContent = ''; playing = true; pop(); }, steps.length * 600);
   }
 
