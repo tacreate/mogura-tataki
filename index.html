@@ -258,7 +258,7 @@
     clearTimeout(escapeTimer);
     const p = POINTS[kind];
     score = Math.max(0, score + p);
-    if (kind === 'normal') limit = Math.max(300, limit * 0.95);
+    if (kind === 'normal') limit = Math.max(350, limit * 0.95);
     if (kind === 'helmet') flash('shake');
     hud();
     holes[i].classList.add('hit');
@@ -310,7 +310,7 @@
   $('back').onclick = () => { showBest(); $('over').hidden = true; $('title').hidden = false; };
 
   score = 0; lives = 3; hud(); showBest();
-  console.assert(goldTime(1800) === 1080 && goldTime(1000) === 650 && goldTime(500) === 500, 'goldTime');
+  console.assert(goldTime(1800) === 1080 && goldTime(1000) === 650 && goldTime(500) === 500 && goldTime(350) === 350, 'goldTime');
 </script>
 </body>
 </html>
